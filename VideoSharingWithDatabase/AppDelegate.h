@@ -1,8 +1,8 @@
 //
 //  AppDelegate.h
-//  VideoSharingWithDatabase
+//  UseExternalPlayer
 //
-//  Created by Catherine Zhao on 2016-04-02.
+//  Created by Catherine Zhao on 2016-03-04.
 //  Copyright © 2016 Catherine. All rights reserved.
 //
 
