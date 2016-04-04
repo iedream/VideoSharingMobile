@@ -64,6 +64,8 @@ UIAlertAction *createAction;
     self.fileURLField.delegate = self;
     
     self.database = [[Database alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadCompleted:) name:@"PlistUploaded" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleted:) name: @"PlistDownloaded"object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -80,11 +82,6 @@ UIAlertAction *createAction;
     //[[DBSession sharedSession] linkFromController:self];
 }
 
--(void)setRestClient {
-   // NSString* userID = [[[DBSession sharedSession] userIds] firstObject];
-    //restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession] userId:userID];
-    //restClient.delegate = self;
-}
 - (IBAction)linkToPublicDropbox:(id)sender {
     //[[DBSession sharedSession] unlinkAll];
     //DBSession *dbSession = [[DBSession alloc]initWithAppKey:@"v7qvmmcql1k3leu" appSecret:@"n24c2enkvp10mdl" root:kDBRootAppFolder];
@@ -96,31 +93,49 @@ UIAlertAction *createAction;
 
 #pragma mark - Upload Plist Methods
 - (IBAction)uploadPlist:(id)sender {
-//    if ([videoIds count] <= 0) {
-//        [self presentAlertView:emptyPlaylistFolder];
-//    }
-//    [self changePlistName:nil];
-//    NSFileManager *fileManage = [NSFileManager defaultManager];
-//    if(![fileManage fileExistsAtPath:fileURL.path]){
-//        [self writeToFile];
-//    }
-    //[self writeToFile];
-    videoIds = [[NSMutableDictionary alloc] init];
-    [videoIds setValue:@[[NSNumber numberWithInt:0], @"4Q0TYHi7GR8"] forKey:@"mingyue"];
-    [videoIds setValue:@[[NSNumber numberWithInt:0], @"iaF5m2HMaGs"] forKey:@"zhidaobu"];
+    if ([videoIds count] <= 0) {
+        [self presentAlertView:emptyPlaylistFolder];
+    }
+    [self changePlistName:nil];
+    [self writeToFile];
     
-    [self.database uploadPlist:videoIds name:@"huangying"];
-    //[restClient loadMetadata:@"/"];
+    [self.database uploadPlist:videoIds name:plistName];
+}
+
+-(void)uploadCompleted:(NSNotification *)notification {
+    NSDictionary *userInfoDict = [notification userInfo];
+    if ([userInfoDict objectForKey:@"data"]) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            [self presentAlertView:uploadSuccess];
+        }];
+    }else if ([userInfoDict objectForKey:@"error"]) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            [self presentAlertView:uploadError];
+        }];
+    }
 }
 
 #pragma mark - Download Plist Methods
 
 - (IBAction)downloadPlist:(id)sender {
-    [self.database downloadPlist:@"huangying"];
-    //[self changePlistName:nil];
-    //[restClient loadFile: [NSString stringWithFormat:@"/%@",plistName] intoPath:fileURL.path];
+    [self changePlistName:nil];
+    [self.database downloadPlist:plistName];
 }
 
+-(void)downloadCompleted:(NSNotification *)notification {
+    NSDictionary *userInfoDict = [notification userInfo];
+    if ([userInfoDict objectForKey:@"data"]) {
+        videoIds = [[NSMutableDictionary alloc]initWithDictionary:[userInfoDict objectForKey:@"data"] copyItems:true];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            [self presentAlertView:downloadSuccess];
+        }];
+        [self writeToFile];
+    }else if ([userInfoDict objectForKey:@"error"]) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            [self presentAlertView:downloadError];
+        }];
+    }
+}
 
 #pragma mark - WriteTo Plist Methods
 -(void)writeToFile {

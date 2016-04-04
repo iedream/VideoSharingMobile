@@ -6,11 +6,12 @@
 //  Copyright © 2016 Catherine. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 @interface Database : NSObject
--(NSString *)uploadPlist:(NSDictionary*)dict name:(NSString*)name;
--(NSDictionary*)downloadPlist:(NSString*)name;
+-(void)uploadPlist:(NSDictionary*)dict name:(NSString*)name;
+-(void)downloadPlist:(NSString*)name;
 -(void)hi;
 
 @end
