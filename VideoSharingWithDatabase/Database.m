@@ -26,7 +26,7 @@
     
     NSMutableDictionary *result = [[NSMutableDictionary alloc]init];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/post_data"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/post/data"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -35,15 +35,16 @@
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if(error) {
             [result setValue:[error localizedDescription] forKey:@"error"];
-        }
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-        NSError *err;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
-        if ([httpResponse statusCode] == 200){
-            
-            [result setValue:[json valueForKey:@"data"] forKey:@"data"];
         }else {
-            [result setValue:[json valueForKey:@"error"] forKey:@"error"];
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+            NSError *err;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            if ([httpResponse statusCode] == 200){
+                
+                [result setValue:[json valueForKey:@"data"] forKey:@"data"];
+            }else {
+                [result setValue:[json valueForKey:@"error"] forKey:@"error"];
+            }
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PlistUploaded" object:nil userInfo:result];
     }];
@@ -56,7 +57,7 @@
 
 -(void)downloadPlist:(NSString*)name {
     NSString *encodedName = [name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/get_data?name=%@", encodedName];
+    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/get/data?name=%@", encodedName];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"GET"];
     
