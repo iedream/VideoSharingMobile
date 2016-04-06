@@ -145,25 +145,25 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv3-l5-FCc">
                                 <rect key="frame" x="20" y="36" width="101" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FileName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7r-0t-Rya">
                                 <rect key="frame" x="20" y="282" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FileType" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRa-iZ-fVk">
                                 <rect key="frame" x="20" y="348" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FileURL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnn-Ez-x6e">
                                 <rect key="frame" x="20" y="212" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Video URL" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AXi-hv-oW0">
@@ -230,25 +230,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1n5-ZP-yqR">
-                                <rect key="frame" x="106" y="142" width="99" height="30"/>
-                                <state key="normal" title="Link Dropbox"/>
-                                <connections>
-                                    <action selector="linkToPersonalDropbox:" destination="R2I-p6-5vu" eventType="touchUpInside" id="79l-HX-fD2"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAk-40-9WQ">
                                 <rect key="frame" x="351" y="142" width="116" height="30"/>
-                                <state key="normal" title="UnLink Dropbox"/>
+                                <state key="normal" title="Create Group"/>
                                 <connections>
-                                    <action selector="linkToPublicDropbox:" destination="R2I-p6-5vu" eventType="touchUpInside" id="JT7-AD-2C8"/>
+                                    <action selector="createGroup:" destination="R2I-p6-5vu" eventType="touchUpInside" id="OfN-sp-3q8"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vtA-yy-HZk">
+                                <rect key="frame" x="95" y="144" width="121" height="29"/>
+                                <segments>
+                                    <segment title="Public"/>
+                                    <segment title="Group"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AXi-hv-oW0" secondAttribute="trailing" constant="20" id="5ps-B0-xZW"/>
-                            <constraint firstItem="1n5-ZP-yqR" firstAttribute="leading" secondItem="urJ-Il-Zr0" secondAttribute="leading" id="8PG-7X-eMg"/>
                             <constraint firstItem="AXi-hv-oW0" firstAttribute="top" secondItem="tnn-Ez-x6e" secondAttribute="top" id="CEn-rg-C2z"/>
                             <constraint firstItem="UY1-Zu-K1L" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="CqT-dg-Sgb"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="bottom" secondItem="My5-0T-3Gq" secondAttribute="bottom" id="E9N-bt-THs"/>
@@ -265,18 +264,19 @@
                             <constraint firstItem="AfB-by-ahc" firstAttribute="top" secondItem="UY1-Zu-K1L" secondAttribute="bottom" constant="30" id="Pdu-9l-YfS"/>
                             <constraint firstItem="k2z-44-4Fo" firstAttribute="top" secondItem="plC-fN-NFI" secondAttribute="bottom" constant="30" id="QP0-lA-PBJ"/>
                             <constraint firstAttribute="trailing" secondItem="aYL-jn-11X" secondAttribute="trailing" constant="30" id="QXj-B2-mcg"/>
-                            <constraint firstItem="1n5-ZP-yqR" firstAttribute="top" secondItem="urJ-Il-Zr0" secondAttribute="bottom" constant="15" id="SUC-Gg-3yD"/>
                             <constraint firstItem="rRa-iZ-fVk" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="TgG-z0-j3S"/>
                             <constraint firstItem="lSk-ge-J37" firstAttribute="leading" secondItem="AXi-hv-oW0" secondAttribute="leading" id="UHM-2b-iZ9"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="leading" secondItem="fv3-l5-FCc" secondAttribute="trailing" constant="15" id="UoL-et-gb5"/>
                             <constraint firstAttribute="trailing" secondItem="My5-0T-3Gq" secondAttribute="trailing" constant="20" id="XID-Qd-N42"/>
                             <constraint firstItem="plC-fN-NFI" firstAttribute="top" secondItem="rRa-iZ-fVk" secondAttribute="top" id="Y6H-PR-6Y3"/>
                             <constraint firstItem="lSk-ge-J37" firstAttribute="bottom" secondItem="S7r-0t-Rya" secondAttribute="bottom" id="Zsr-J7-D4V"/>
+                            <constraint firstItem="vtA-yy-HZk" firstAttribute="top" secondItem="urJ-Il-Zr0" secondAttribute="bottom" constant="15" id="ahe-yb-D0e"/>
                             <constraint firstItem="rRa-iZ-fVk" firstAttribute="top" secondItem="S7r-0t-Rya" secondAttribute="bottom" constant="20" id="bop-Oh-M5K"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="top" secondItem="My5-0T-3Gq" secondAttribute="top" id="dgg-pU-RmQ"/>
                             <constraint firstAttribute="trailing" secondItem="s9Q-HA-AgG" secondAttribute="trailing" constant="20" id="eZj-Fv-bSw"/>
                             <constraint firstItem="fv3-l5-FCc" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="ehF-o4-uAj"/>
                             <constraint firstItem="AfB-by-ahc" firstAttribute="top" secondItem="s9Q-HA-AgG" secondAttribute="bottom" constant="30" id="f0Y-Eh-RZj"/>
+                            <constraint firstItem="vtA-yy-HZk" firstAttribute="centerX" secondItem="urJ-Il-Zr0" secondAttribute="centerX" id="gJe-Cx-wu4"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="leading" secondItem="lSk-ge-J37" secondAttribute="leading" id="h2Z-ay-gMg"/>
                             <constraint firstItem="lSk-ge-J37" firstAttribute="top" secondItem="S7r-0t-Rya" secondAttribute="top" id="iPj-GF-62W"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="top" secondItem="fv3-l5-FCc" secondAttribute="top" id="mpW-1R-a6w"/>
@@ -296,6 +296,7 @@
                         <outlet property="fileTypeSelector" destination="plC-fN-NFI" id="E5e-5z-Ktw"/>
                         <outlet property="fileURLField" destination="AXi-hv-oW0" id="AWP-Im-38w"/>
                         <outlet property="groupNameField" destination="Wdb-Ww-n8n" id="fgZ-bU-Qdf"/>
+                        <outlet property="typePlistSegment" destination="vtA-yy-HZk" id="NuW-zf-whD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez1-yn-lmE" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -22,6 +22,7 @@ typedef enum fileTypes
 @property (weak, nonatomic) IBOutlet UITextField *fileNameField;
 @property (weak, nonatomic) IBOutlet UITextField *fileURLField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *fileTypeSelector;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *typePlistSegment;
 
 -(void)setRestClient;
 + (instancetype)sharedInstance;

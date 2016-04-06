@@ -11,7 +11,9 @@
 
 @interface Database : NSObject
 -(void)uploadPlist:(NSDictionary*)dict name:(NSString*)name;
+-(void)uploadPlist:(NSDictionary *)dict name:(NSString *)name group:(NSString*)group password:(NSString*)password;
 -(void)downloadPlist:(NSString*)name;
--(void)hi;
+-(void)downloadPlist:(NSString *)name group:(NSString*)group password:(NSString*)password;
+-(void)createGroup:(NSString*)group password:(NSString*)password;
 
 @end

@@ -17,18 +17,31 @@
 NSURL *fileURL;
 NSString *plistName;
 NSMutableDictionary *videoIds;
+
 UIAlertController *emptyGroupName;
 UIAlertController *emptyPlaylistFolder;
-UIAlertController *createNewPlaylist;
-UIAlertController *downloadError;
-UIAlertController *missingFileName;
-UIAlertController *missingFileURL;
 UIAlertController *uploadSuccess;
 UIAlertController *downloadSuccess;
 UIAlertController *uploadError;
+UIAlertController *downloadError;
 UIAlertAction *okAction;
+
+UIAlertController *groupUploadAction;
+UIAlertController *groupDownloadAction;
+UIAlertAction *uploadGroupAction;
+UIAlertAction *downloadGroupAction;
+
+UIAlertController *missingFileName;
+UIAlertController *missingFileURL;
 UIAlertAction *cancelAction;
 UIAlertAction *createAction;
+
+UIAlertController *createGroup;
+UIAlertController *passwordMismatchError;
+UIAlertController *createGroupSuccess;
+UIAlertController *createGroupError;
+UIAlertAction *submitCreateAction;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,6 +55,9 @@ UIAlertAction *createAction;
     missingFileURL = [UIAlertController alertControllerWithTitle:@"File URL cannot be Empty" message:@"Please enter in a File URL" preferredStyle:UIAlertControllerStyleAlert];
     uploadSuccess = [UIAlertController alertControllerWithTitle:@"Upload Successful" message:@"PlayList successfully Uploaded" preferredStyle:UIAlertControllerStyleAlert];
     downloadSuccess = [UIAlertController alertControllerWithTitle:@"Download Successful" message:@"PlayList successfully Downloaded" preferredStyle:UIAlertControllerStyleAlert];
+    passwordMismatchError = [UIAlertController alertControllerWithTitle:@"Password Mismatch" message:@"Password does not match" preferredStyle:UIAlertControllerStyleAlert];
+    createGroupError = [UIAlertController alertControllerWithTitle:@"Create Group Error" message:@"Create Group encounters an error. Please make sure you have internet connection" preferredStyle:UIAlertControllerStyleAlert];
+    createGroupSuccess = [UIAlertController alertControllerWithTitle:@"Create Group Success" message:@"New Group successfully Created" preferredStyle:UIAlertControllerStyleAlert];
     okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
     [emptyGroupName addAction:okAction];
     [emptyPlaylistFolder addAction:okAction];
@@ -51,21 +67,75 @@ UIAlertAction *createAction;
     [missingFileURL addAction:okAction];
     [uploadSuccess addAction:okAction];
     [downloadSuccess addAction:okAction];
+    [passwordMismatchError addAction:okAction];
+    [createGroupError addAction:okAction];
+    [createGroupSuccess addAction:okAction];
     
-    
-    createNewPlaylist = [UIAlertController alertControllerWithTitle:@"Create New Playlist" message:@"This playlist does not exist yet. Are you sure you want to create it?" preferredStyle:UIAlertControllerStyleAlert];
-    cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-    createAction = [UIAlertAction actionWithTitle:@"Create" style:UIAlertActionStyleDefault handler:^(UIAlertAction *alert) {
-        //[restClient uploadFile:plistName toPath:@"/" withParentRev:nil fromPath:fileURL.path];
+    createGroup = [UIAlertController alertControllerWithTitle:@"Create New Group" message:@"Create New Group" preferredStyle:UIAlertControllerStyleAlert];
+    [createGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Group Name";
     }];
-    [createNewPlaylist addAction:createAction];
-    [createNewPlaylist addAction:cancelAction];
+    [createGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Password";
+        textField.secureTextEntry = YES;
+    }];
+    [createGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Conform Password";
+        textField.secureTextEntry = YES;
+    }];
+    submitCreateAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSString *groupName = createGroup.textFields.firstObject.text;
+        NSString *password = createGroup.textFields[1].text;
+        NSString *passwordConform = createGroup.textFields.lastObject.text;
+        if ([password isEqualToString:passwordConform]) {
+            [self.database createGroup:groupName password:password];
+        }else{
+            [self presentAlertView:passwordMismatchError];
+        }
+    }];
+    cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [createGroup addAction:submitCreateAction];
+    [createGroup addAction:cancelAction];
     
+    groupUploadAction = [UIAlertController alertControllerWithTitle:@"Upload" message:@"Upload to Group" preferredStyle:UIAlertControllerStyleAlert];
+    [groupUploadAction addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Group Name";
+    }];
+    [groupUploadAction addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Password";
+        textField.secureTextEntry = YES;
+    }];
+    uploadGroupAction = [UIAlertAction actionWithTitle:@"Upload" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSString *groupName = groupUploadAction.textFields.firstObject.text;
+        NSString *password = groupUploadAction.textFields.lastObject.text;
+        [self.database uploadPlist:videoIds name:plistName group:groupName password:password];
+    }];
+    [groupUploadAction addAction:uploadGroupAction];
+    [groupUploadAction addAction:cancelAction];
+    
+    groupDownloadAction = [UIAlertController alertControllerWithTitle:@"Download" message:@"Download from Group" preferredStyle:UIAlertControllerStyleAlert];
+    [groupDownloadAction addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Group Name";
+    }];
+    [groupDownloadAction addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Password";
+        textField.secureTextEntry = YES;
+    }];
+    downloadGroupAction = [UIAlertAction actionWithTitle:@"Download" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSString *groupName = groupDownloadAction.textFields.firstObject.text;
+        NSString *password = groupDownloadAction.textFields.lastObject.text;
+        [self.database downloadPlist:plistName group:groupName password:password];
+    }];
+    [groupDownloadAction addAction:downloadGroupAction];
+    [groupDownloadAction addAction:cancelAction];
+
+
     self.fileURLField.delegate = self;
     
     self.database = [[Database alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadCompleted:) name:@"PlistUploaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleted:) name: @"PlistDownloaded"object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GroupCreatedCompleted:) name:@"GroupCreated" object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -77,18 +147,23 @@ UIAlertAction *createAction;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)linkToPersonalDropbox:(id)sender {
-    //[[DBSession sharedSession] unlinkAll];
-    //[[DBSession sharedSession] linkFromController:self];
+- (IBAction)createGroup:(id)sender {
+    [self presentAlertView:createGroup];
 }
 
-- (IBAction)linkToPublicDropbox:(id)sender {
-    //[[DBSession sharedSession] unlinkAll];
-    //DBSession *dbSession = [[DBSession alloc]initWithAppKey:@"v7qvmmcql1k3leu" appSecret:@"n24c2enkvp10mdl" root:kDBRootAppFolder];
-    //[dbSession updateAccessToken:@"9uu88jm18fhverki" accessTokenSecret:@"6zxgx2dbtnnjpqv" forUserId:@"551438413"];
-    //[DBSession setSharedSession:dbSession];
-    //restClient = [[DBRestClient alloc] initWithSession:dbSession userId:@"551438413"];
-    //restClient.delegate = self;
+-(void)GroupCreatedCompleted:(NSNotification *)notification {
+    NSDictionary *userInfoDict = [notification userInfo];
+    if ([userInfoDict objectForKey:@"data"]) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            createGroupSuccess.message = [userInfoDict objectForKey:@"data"];
+            [self presentAlertView:createGroupSuccess];
+        }];
+    }else if ([userInfoDict objectForKey:@"error"]) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            createGroupError.message = [userInfoDict objectForKey:@"error"];
+            [self presentAlertView:createGroupError];
+        }];
+    }
 }
 
 #pragma mark - Upload Plist Methods
@@ -100,17 +175,23 @@ UIAlertAction *createAction;
     [self changePlistName:nil];
     [self writeToFile];
     
-    [self.database uploadPlist:videoIds name:plistName];
+    if ([self.typePlistSegment selectedSegmentIndex] == 0) {
+        [self.database uploadPlist:videoIds name:plistName];
+    }else {
+        [self presentAlertView:groupUploadAction];
+    }
 }
 
 -(void)uploadCompleted:(NSNotification *)notification {
     NSDictionary *userInfoDict = [notification userInfo];
     if ([userInfoDict objectForKey:@"data"]) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            uploadSuccess.message = [userInfoDict objectForKey:@"data"];
             [self presentAlertView:uploadSuccess];
         }];
     }else if ([userInfoDict objectForKey:@"error"]) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            uploadError.message = [userInfoDict objectForKey:@"error"];
             [self presentAlertView:uploadError];
         }];
     }
@@ -120,7 +201,11 @@ UIAlertAction *createAction;
 
 - (IBAction)downloadPlist:(id)sender {
     [self changePlistName:nil];
-    [self.database downloadPlist:plistName];
+    if ([self.typePlistSegment selectedSegmentIndex] == 0) {
+        [self.database downloadPlist:plistName];
+    }else {
+        [self presentAlertView:groupDownloadAction];
+    }
 }
 
 -(void)downloadCompleted:(NSNotification *)notification {
@@ -133,6 +218,7 @@ UIAlertAction *createAction;
         [self writeToFile];
     }else if ([userInfoDict objectForKey:@"error"]) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            downloadError.message = [userInfoDict objectForKey:@"error"];
             [self presentAlertView:downloadError];
         }];
     }
