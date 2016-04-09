@@ -143,76 +143,76 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv3-l5-FCc">
-                                <rect key="frame" x="20" y="36" width="101" height="26"/>
+                                <rect key="frame" x="20" y="268" width="101" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FileName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7r-0t-Rya">
-                                <rect key="frame" x="20" y="282" width="101" height="21"/>
+                                <rect key="frame" x="20" y="84" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FileType" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRa-iZ-fVk">
-                                <rect key="frame" x="20" y="348" width="101" height="21"/>
+                                <rect key="frame" x="20" y="142" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FileURL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnn-Ez-x6e">
-                                <rect key="frame" x="20" y="212" width="101" height="21"/>
+                                <rect key="frame" x="20" y="28" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Video URL" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AXi-hv-oW0">
-                                <rect key="frame" x="150" y="209" width="374" height="30"/>
+                                <rect key="frame" x="150" y="24" width="374" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2z-44-4Fo">
-                                <rect key="frame" x="263" y="434" width="74" height="30"/>
+                                <rect key="frame" x="263" y="209" width="74" height="30"/>
                                 <state key="normal" title="Add Video"/>
                                 <connections>
                                     <action selector="addVideo:" destination="R2I-p6-5vu" eventType="touchUpInside" id="8We-mh-IML"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urJ-Il-Zr0">
-                                <rect key="frame" x="79" y="94" width="153" height="30"/>
+                                <rect key="frame" x="67" y="440" width="153" height="30"/>
                                 <state key="normal" title="Upload Playlist"/>
                                 <connections>
                                     <action selector="uploadPlist:" destination="R2I-p6-5vu" eventType="touchUpInside" id="qpw-x0-6Xq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYL-jn-11X">
-                                <rect key="frame" x="318" y="94" width="179" height="30"/>
+                                <rect key="frame" x="365" y="440" width="179" height="30"/>
                                 <state key="normal" title="Download Playlist"/>
                                 <connections>
                                     <action selector="downloadPlist:" destination="R2I-p6-5vu" eventType="touchUpInside" id="cnj-fJ-h8m"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="plC-fN-NFI">
-                                <rect key="frame" x="150" y="345" width="121" height="29"/>
+                                <rect key="frame" x="150" y="139" width="121" height="29"/>
                                 <segments>
                                     <segment title="Youtube"/>
                                     <segment title="Other"/>
                                 </segments>
                             </segmentedControl>
                             <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Wdb-Ww-n8n">
-                                <rect key="frame" x="150" y="34" width="270" height="30"/>
+                                <rect key="frame" x="165" y="266" width="270" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="My5-0T-3Gq">
-                                <rect key="frame" x="465" y="34" width="59" height="30"/>
+                                <rect key="frame" x="496" y="266" width="59" height="30"/>
                                 <state key="normal" title="Change"/>
                                 <connections>
                                     <action selector="changePlistName:" destination="R2I-p6-5vu" eventType="touchUpInside" id="GYl-xx-l5Y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UY1-Zu-K1L">
-                                <rect key="frame" x="20" y="491" width="179" height="30"/>
+                                <rect key="frame" x="54" y="491" width="179" height="30"/>
                                 <state key="normal" title="Clear Youtube List"/>
                                 <connections>
                                     <action selector="clearYoutubeList:" destination="R2I-p6-5vu" eventType="touchUpInside" id="fJ5-GL-Xui"/>
@@ -226,19 +226,26 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Video Name" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lSk-ge-J37">
-                                <rect key="frame" x="150" y="278" width="374" height="30"/>
+                                <rect key="frame" x="150" y="80" width="374" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAk-40-9WQ">
-                                <rect key="frame" x="351" y="142" width="116" height="30"/>
+                                <rect key="frame" x="396" y="382" width="116" height="30"/>
                                 <state key="normal" title="Create Group"/>
                                 <connections>
                                     <action selector="createGroup:" destination="R2I-p6-5vu" eventType="touchUpInside" id="OfN-sp-3q8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBj-sO-dkJ">
+                                <rect key="frame" x="93" y="382" width="100" height="30"/>
+                                <state key="normal" title="Delete Playlist"/>
+                                <connections>
+                                    <action selector="deletePlaylist:" destination="R2I-p6-5vu" eventType="touchUpInside" id="w7w-Tz-rWh"/>
+                                </connections>
+                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vtA-yy-HZk">
-                                <rect key="frame" x="95" y="144" width="121" height="29"/>
+                                <rect key="frame" x="240" y="332" width="121" height="29"/>
                                 <segments>
                                     <segment title="Public"/>
                                     <segment title="Group"/>
@@ -247,47 +254,49 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="s9Q-HA-AgG" firstAttribute="top" secondItem="aYL-jn-11X" secondAttribute="bottom" constant="10" id="3KA-zl-3Mo"/>
+                            <constraint firstAttribute="trailing" secondItem="KAk-40-9WQ" secondAttribute="trailing" constant="20" id="3qI-28-Qa1"/>
                             <constraint firstAttribute="trailing" secondItem="AXi-hv-oW0" secondAttribute="trailing" constant="20" id="5ps-B0-xZW"/>
                             <constraint firstItem="AXi-hv-oW0" firstAttribute="top" secondItem="tnn-Ez-x6e" secondAttribute="top" id="CEn-rg-C2z"/>
                             <constraint firstItem="UY1-Zu-K1L" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="CqT-dg-Sgb"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="bottom" secondItem="My5-0T-3Gq" secondAttribute="bottom" id="E9N-bt-THs"/>
-                            <constraint firstItem="AfB-by-ahc" firstAttribute="top" secondItem="k2z-44-4Fo" secondAttribute="bottom" constant="60" id="GMN-pM-3JH"/>
                             <constraint firstItem="AXi-hv-oW0" firstAttribute="bottom" secondItem="tnn-Ez-x6e" secondAttribute="bottom" id="HPo-qA-4bC"/>
+                            <constraint firstItem="UY1-Zu-K1L" firstAttribute="top" secondItem="urJ-Il-Zr0" secondAttribute="bottom" constant="10" id="HXj-Tt-kfN"/>
                             <constraint firstItem="k2z-44-4Fo" firstAttribute="centerX" secondItem="CYF-dk-LU6" secondAttribute="centerX" id="JMa-bk-Vwl"/>
                             <constraint firstItem="urJ-Il-Zr0" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="30" id="Jig-8b-Cuf"/>
                             <constraint firstItem="plC-fN-NFI" firstAttribute="bottom" secondItem="rRa-iZ-fVk" secondAttribute="bottom" id="KZk-Vc-mpM"/>
-                            <constraint firstItem="aYL-jn-11X" firstAttribute="top" secondItem="Wdb-Ww-n8n" secondAttribute="bottom" constant="30" id="Kan-Os-aay"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="bottom" secondItem="fv3-l5-FCc" secondAttribute="bottom" id="L7G-VE-6VD"/>
-                            <constraint firstItem="S7r-0t-Rya" firstAttribute="top" secondItem="tnn-Ez-x6e" secondAttribute="bottom" constant="20" id="MwZ-dv-yBG"/>
-                            <constraint firstItem="KAk-40-9WQ" firstAttribute="trailing" secondItem="aYL-jn-11X" secondAttribute="trailing" id="N4F-Kp-BNp"/>
-                            <constraint firstItem="fv3-l5-FCc" firstAttribute="top" secondItem="EEG-ud-W8a" secondAttribute="bottom" constant="20" id="Nja-Ux-M5v"/>
-                            <constraint firstItem="AfB-by-ahc" firstAttribute="top" secondItem="UY1-Zu-K1L" secondAttribute="bottom" constant="30" id="Pdu-9l-YfS"/>
-                            <constraint firstItem="k2z-44-4Fo" firstAttribute="top" secondItem="plC-fN-NFI" secondAttribute="bottom" constant="30" id="QP0-lA-PBJ"/>
-                            <constraint firstAttribute="trailing" secondItem="aYL-jn-11X" secondAttribute="trailing" constant="30" id="QXj-B2-mcg"/>
+                            <constraint firstItem="S7r-0t-Rya" firstAttribute="top" secondItem="tnn-Ez-x6e" secondAttribute="bottom" constant="15" id="MwZ-dv-yBG"/>
+                            <constraint firstItem="AfB-by-ahc" firstAttribute="top" secondItem="UY1-Zu-K1L" secondAttribute="bottom" constant="20" id="Pdu-9l-YfS"/>
+                            <constraint firstItem="k2z-44-4Fo" firstAttribute="top" secondItem="plC-fN-NFI" secondAttribute="bottom" constant="15" id="QP0-lA-PBJ"/>
+                            <constraint firstAttribute="trailing" secondItem="aYL-jn-11X" secondAttribute="trailing" constant="20" id="QXj-B2-mcg"/>
                             <constraint firstItem="rRa-iZ-fVk" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="TgG-z0-j3S"/>
+                            <constraint firstItem="urJ-Il-Zr0" firstAttribute="top" secondItem="fBj-sO-dkJ" secondAttribute="bottom" constant="10" id="Tov-Nr-Llg"/>
                             <constraint firstItem="lSk-ge-J37" firstAttribute="leading" secondItem="AXi-hv-oW0" secondAttribute="leading" id="UHM-2b-iZ9"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="leading" secondItem="fv3-l5-FCc" secondAttribute="trailing" constant="15" id="UoL-et-gb5"/>
                             <constraint firstAttribute="trailing" secondItem="My5-0T-3Gq" secondAttribute="trailing" constant="20" id="XID-Qd-N42"/>
+                            <constraint firstItem="vtA-yy-HZk" firstAttribute="centerX" secondItem="CYF-dk-LU6" secondAttribute="centerX" id="Xzc-KO-eg8"/>
                             <constraint firstItem="plC-fN-NFI" firstAttribute="top" secondItem="rRa-iZ-fVk" secondAttribute="top" id="Y6H-PR-6Y3"/>
                             <constraint firstItem="lSk-ge-J37" firstAttribute="bottom" secondItem="S7r-0t-Rya" secondAttribute="bottom" id="Zsr-J7-D4V"/>
-                            <constraint firstItem="vtA-yy-HZk" firstAttribute="top" secondItem="urJ-Il-Zr0" secondAttribute="bottom" constant="15" id="ahe-yb-D0e"/>
-                            <constraint firstItem="rRa-iZ-fVk" firstAttribute="top" secondItem="S7r-0t-Rya" secondAttribute="bottom" constant="20" id="bop-Oh-M5K"/>
+                            <constraint firstItem="vtA-yy-HZk" firstAttribute="top" secondItem="Wdb-Ww-n8n" secondAttribute="bottom" constant="20" id="ZvM-NB-Jz9"/>
+                            <constraint firstItem="rRa-iZ-fVk" firstAttribute="top" secondItem="S7r-0t-Rya" secondAttribute="bottom" constant="15" id="bop-Oh-M5K"/>
+                            <constraint firstItem="aYL-jn-11X" firstAttribute="top" secondItem="KAk-40-9WQ" secondAttribute="bottom" constant="10" id="cXm-Ea-uA2"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="top" secondItem="My5-0T-3Gq" secondAttribute="top" id="dgg-pU-RmQ"/>
                             <constraint firstAttribute="trailing" secondItem="s9Q-HA-AgG" secondAttribute="trailing" constant="20" id="eZj-Fv-bSw"/>
                             <constraint firstItem="fv3-l5-FCc" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="ehF-o4-uAj"/>
-                            <constraint firstItem="AfB-by-ahc" firstAttribute="top" secondItem="s9Q-HA-AgG" secondAttribute="bottom" constant="30" id="f0Y-Eh-RZj"/>
-                            <constraint firstItem="vtA-yy-HZk" firstAttribute="centerX" secondItem="urJ-Il-Zr0" secondAttribute="centerX" id="gJe-Cx-wu4"/>
+                            <constraint firstItem="AfB-by-ahc" firstAttribute="top" secondItem="s9Q-HA-AgG" secondAttribute="bottom" constant="20" id="f0Y-Eh-RZj"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="leading" secondItem="lSk-ge-J37" secondAttribute="leading" id="h2Z-ay-gMg"/>
+                            <constraint firstItem="AXi-hv-oW0" firstAttribute="top" secondItem="EEG-ud-W8a" secondAttribute="bottom" constant="20" id="hOM-tm-i1D"/>
                             <constraint firstItem="lSk-ge-J37" firstAttribute="top" secondItem="S7r-0t-Rya" secondAttribute="top" id="iPj-GF-62W"/>
+                            <constraint firstItem="tnn-Ez-x6e" firstAttribute="top" secondItem="EEG-ud-W8a" secondAttribute="bottom" constant="20" id="isD-Tm-WLd"/>
                             <constraint firstItem="Wdb-Ww-n8n" firstAttribute="top" secondItem="fv3-l5-FCc" secondAttribute="top" id="mpW-1R-a6w"/>
-                            <constraint firstItem="KAk-40-9WQ" firstAttribute="top" secondItem="aYL-jn-11X" secondAttribute="bottom" constant="15" id="oTG-t7-bM8"/>
-                            <constraint firstItem="My5-0T-3Gq" firstAttribute="top" secondItem="EEG-ud-W8a" secondAttribute="bottom" constant="20" id="pC7-3c-GkK"/>
                             <constraint firstAttribute="trailing" secondItem="lSk-ge-J37" secondAttribute="trailing" constant="20" id="ra8-Yo-v7f"/>
                             <constraint firstItem="AXi-hv-oW0" firstAttribute="leading" secondItem="plC-fN-NFI" secondAttribute="leading" id="rfY-02-K8j"/>
-                            <constraint firstItem="Wdb-Ww-n8n" firstAttribute="trailing" secondItem="aYL-jn-11X" secondAttribute="trailing" constant="-50" id="sGf-ba-9VI"/>
+                            <constraint firstItem="Wdb-Ww-n8n" firstAttribute="trailing" secondItem="aYL-jn-11X" secondAttribute="trailing" constant="-60" id="sGf-ba-9VI"/>
+                            <constraint firstItem="fBj-sO-dkJ" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="30" id="uGt-dJ-bph"/>
                             <constraint firstItem="S7r-0t-Rya" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="wp8-in-CDB"/>
+                            <constraint firstItem="fBj-sO-dkJ" firstAttribute="top" secondItem="vtA-yy-HZk" secondAttribute="bottom" constant="10" id="xSC-EZ-r7a"/>
                             <constraint firstItem="tnn-Ez-x6e" firstAttribute="leading" secondItem="CYF-dk-LU6" secondAttribute="leading" constant="20" id="yFQ-VP-ugh"/>
-                            <constraint firstItem="urJ-Il-Zr0" firstAttribute="top" secondItem="Wdb-Ww-n8n" secondAttribute="bottom" constant="30" id="yOu-p9-fMU"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PlayList" id="Jbe-pe-Zk2"/>

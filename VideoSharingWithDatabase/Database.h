@@ -15,5 +15,7 @@
 -(void)downloadPlist:(NSString*)name;
 -(void)downloadPlist:(NSString *)name group:(NSString*)group password:(NSString*)password;
 -(void)createGroup:(NSString*)group password:(NSString*)password;
+-(void)delete:(NSString *)name group:(NSString *)group password:(NSString*)password;
+-(void)delete:(NSString *)name;
 
 @end

@@ -67,6 +67,34 @@
     [self creating:[request copy]];
 }
 
+-(void)delete:(NSString *)name {
+    NSData *data = [self dictToJson:nil name:name group:nil password:nil];
+    // calculate body string length
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/delete/data"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
+    [request setHTTPMethod:@"DELETE"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:data];
+    
+    [self deleting:[request copy]];
+}
+
+-(void)delete:(NSString *)name group:(NSString *)group password:(NSString*)password {
+    NSData *data = [self dictToJson:nil name:name group:group password:password];
+    // calculate body string length
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/group/delete/data"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
+    [request setHTTPMethod:@"DELETE"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:data];
+    
+    [self deleting:[request copy]];
+}
+
 #pragma mark - Main Method
 -(void)uploading:(NSURLRequest*)request {
     NSMutableDictionary *result = [[NSMutableDictionary alloc]init];
@@ -132,6 +160,27 @@
     [task resume];
 }
 
+-(void)deleting:(NSURLRequest*)request {
+    NSMutableDictionary *result = [[NSMutableDictionary alloc]init];
+    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if(error) {
+            [result setValue:[error localizedDescription] forKey:@"error"];
+        }else {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+            NSError *err;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            if ([httpResponse statusCode] == 200){
+                
+                [result setValue:[json valueForKey:@"data"] forKey:@"data"];
+            }else {
+                [result setValue:[json valueForKey:@"error"] forKey:@"error"];
+            }
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaylistDeleted" object:nil userInfo:result];
+    }];
+    [task resume];
+}
+
 #pragma mark - Helper Method
 -(NSData*)dictToJson:(NSDictionary*)dict name:(NSString*)name group:(NSString*)group password:(NSString*)password {
     // convert dict into json if neccessary
@@ -147,11 +196,16 @@
     NSString *dataString;
     if(group && password && dict && name) {
         dataString = [NSString stringWithFormat:@"name=%@&data=%@&groupId=%@&password=%@",name, stringDict, group, password];
-    }else if(dict && name){
-        dataString = [NSString stringWithFormat:@"name=%@&data=%@",name, stringDict];
+    }else if(name && group && password) {
+        dataString = [NSString stringWithFormat:@"name=%@&groupId=%@&password=%@",name, group, password];
     }else if(group && password) {
         dataString = [NSString stringWithFormat:@"groupId=%@&password=%@",group, password];
+    }else if(dict && name){
+        dataString = [NSString stringWithFormat:@"name=%@&data=%@",name, stringDict];
+    }else if(name) {
+        dataString = [NSString stringWithFormat:@"name=%@",name];
     }
+    
     // encode body string
     NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     return data;
