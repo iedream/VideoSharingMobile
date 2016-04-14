@@ -82,14 +82,16 @@ UIAlertAction *submitCreateAction;
     createGroup = [UIAlertController alertControllerWithTitle:@"Create New Group" message:@"Create New Group" preferredStyle:UIAlertControllerStyleAlert];
     [createGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Group Name";
+        textField.clearsOnBeginEditing = YES;
     }];
     [createGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Password";
         textField.secureTextEntry = YES;
+        textField.clearsOnBeginEditing = YES;
     }];
     [createGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Conform Password";
-        textField.secureTextEntry = YES;
+        textField.secureTextEntry = YES;textField.clearsOnBeginEditing = YES;
     }];
     submitCreateAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSString *groupName = createGroup.textFields.firstObject.text;
@@ -108,10 +110,12 @@ UIAlertAction *submitCreateAction;
     groupUpload = [UIAlertController alertControllerWithTitle:@"Upload" message:@"Upload to Group" preferredStyle:UIAlertControllerStyleAlert];
     [groupUpload addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Group Name";
+        textField.clearsOnBeginEditing = YES;
     }];
     [groupUpload addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Password";
         textField.secureTextEntry = YES;
+        textField.clearsOnBeginEditing = YES;
     }];
     uploadGroupAction = [UIAlertAction actionWithTitle:@"Upload" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSString *groupName = groupUpload.textFields.firstObject.text;
@@ -124,10 +128,12 @@ UIAlertAction *submitCreateAction;
     groupDownload = [UIAlertController alertControllerWithTitle:@"Download" message:@"Download from Group" preferredStyle:UIAlertControllerStyleAlert];
     [groupDownload addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Group Name";
+        textField.clearsOnBeginEditing = YES;
     }];
     [groupDownload addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Password";
         textField.secureTextEntry = YES;
+        textField.clearsOnBeginEditing = YES;
     }];
     downloadGroupAction = [UIAlertAction actionWithTitle:@"Download" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSString *groupName = groupDownload.textFields.firstObject.text;
@@ -140,10 +146,12 @@ UIAlertAction *submitCreateAction;
     groupDelete = [UIAlertController alertControllerWithTitle:@"Delete" message:@"Delete form Group" preferredStyle:UIAlertControllerStyleAlert];
     [groupDelete addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Group Name";
+        textField.clearsOnBeginEditing = YES;
     }];
     [groupDelete addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Password";
         textField.secureTextEntry = YES;
+        textField.clearsOnBeginEditing = YES;
     }];
     deleteGroupAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSString *groupName = groupDelete.textFields.firstObject.text;
@@ -194,6 +202,9 @@ UIAlertAction *submitCreateAction;
 
 - (IBAction)deletePlaylist:(id)sender {
     [self changePlistName:nil];
+    if (!plistName) {
+        return;
+    }
     if ([self.typePlistSegment selectedSegmentIndex] == 0) {
         [self.database delete:plistName];
     }else {
@@ -219,11 +230,14 @@ UIAlertAction *submitCreateAction;
 
 #pragma mark - Upload Plist Methods
 - (IBAction)uploadPlist:(id)sender {
+    [self changePlistName:nil];
+    if (!plistName) {
+        return;
+    }
     if ([videoIds count] <= 0) {
         [self presentAlertView:emptyPlaylistFolder];
         return;
     }
-    [self changePlistName:nil];
     [self writeToFile];
     
     if ([self.typePlistSegment selectedSegmentIndex] == 0) {
@@ -252,6 +266,9 @@ UIAlertAction *submitCreateAction;
 
 - (IBAction)downloadPlist:(id)sender {
     [self changePlistName:nil];
+    if (!plistName) {
+        return;
+    }
     if ([self.typePlistSegment selectedSegmentIndex] == 0) {
         [self.database downloadPlist:plistName];
     }else {

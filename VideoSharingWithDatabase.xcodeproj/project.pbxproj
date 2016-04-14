@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F4038C31CBC8FCC00924E0B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F4038C11CBC8FCC00924E0B /* Default-568h@2x.png */; };
+		4F4038C41CBC8FCC00924E0B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F4038C21CBC8FCC00924E0B /* Default@2x.png */; };
 		4FDFFB961CB08387007A3794 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FDFFB951CB08387007A3794 /* main.m */; };
 		4FDFFB991CB08387007A3794 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FDFFB981CB08387007A3794 /* AppDelegate.m */; };
 		4FDFFBA21CB08387007A3794 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FDFFBA01CB08387007A3794 /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F4038C11CBC8FCC00924E0B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		4F4038C21CBC8FCC00924E0B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4FDFFB911CB08387007A3794 /* VideoSharingWithDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoSharingWithDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FDFFB951CB08387007A3794 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4FDFFB971CB08387007A3794 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		4FDFFB881CB08387007A3794 = {
 			isa = PBXGroup;
 			children = (
+				4F4038C11CBC8FCC00924E0B /* Default-568h@2x.png */,
+				4F4038C21CBC8FCC00924E0B /* Default@2x.png */,
 				4FDFFB931CB08387007A3794 /* VideoSharingWithDatabase */,
 				4FDFFBB01CB08387007A3794 /* VideoSharingWithDatabaseTests */,
 				4FDFFBBB1CB08387007A3794 /* VideoSharingWithDatabaseUITests */,
@@ -286,6 +292,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FDFFBA71CB08387007A3794 /* LaunchScreen.storyboard in Resources */,
+				4F4038C31CBC8FCC00924E0B /* Default-568h@2x.png in Resources */,
+				4F4038C41CBC8FCC00924E0B /* Default@2x.png in Resources */,
 				4FDFFBA41CB08387007A3794 /* Assets.xcassets in Resources */,
 				4FDFFBA21CB08387007A3794 /* Main.storyboard in Resources */,
 			);
@@ -505,10 +513,12 @@
 			baseConfigurationReference = B94ED7317541EDFB365608D1 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = VideoSharingWithDatabase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Catherine.VideoSharingWithDatabase;
+				PRODUCT_BUNDLE_IDENTIFIER = Catherine.VideoSharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -517,10 +527,12 @@
 			baseConfigurationReference = CF549D8D6A22F9AFF71788EC /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = VideoSharingWithDatabase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Catherine.VideoSharingWithDatabase;
+				PRODUCT_BUNDLE_IDENTIFIER = Catherine.VideoSharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
