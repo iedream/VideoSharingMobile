@@ -37,6 +37,7 @@ UIAlertAction *deleteGroupAction;
 
 UIAlertController *missingFileName;
 UIAlertController *missingFileURL;
+UIAlertController *invalidYoutubeURL;
 UIAlertAction *cancelAction;
 UIAlertAction *createAction;
 
@@ -57,6 +58,7 @@ UIAlertAction *submitCreateAction;
     downloadError = [UIAlertController alertControllerWithTitle:@"Download Error" message:@"Download Playlist encounters an error. Please make sure you have internet connection" preferredStyle:UIAlertControllerStyleAlert];
     missingFileName = [UIAlertController alertControllerWithTitle:@"File Name cannot be Empty" message:@"Please enter in a File Name" preferredStyle:UIAlertControllerStyleAlert];
     missingFileURL = [UIAlertController alertControllerWithTitle:@"File URL cannot be Empty" message:@"Please enter in a File URL" preferredStyle:UIAlertControllerStyleAlert];
+    invalidYoutubeURL = [UIAlertController alertControllerWithTitle:@"Invalid URL" message:@"The input URL doesn't seem like a valid Youtube Video. Try Adding as a type Other instead" preferredStyle:UIAlertControllerStyleAlert];
     uploadSuccess = [UIAlertController alertControllerWithTitle:@"Upload Successful" message:@"PlayList successfully Uploaded" preferredStyle:UIAlertControllerStyleAlert];
     downloadSuccess = [UIAlertController alertControllerWithTitle:@"Download Successful" message:@"PlayList successfully Downloaded" preferredStyle:UIAlertControllerStyleAlert];
     deleteSuccess = [UIAlertController alertControllerWithTitle:@"Delete Successful" message:@"Playlist successfully Deleted" preferredStyle:UIAlertControllerStyleAlert];
@@ -71,6 +73,7 @@ UIAlertAction *submitCreateAction;
     [downloadError addAction:okAction];
     [missingFileName addAction:okAction];
     [missingFileURL addAction:okAction];
+    [invalidYoutubeURL addAction:okAction];
     [uploadSuccess addAction:okAction];
     [downloadSuccess addAction:okAction];
     [passwordMismatchError addAction:okAction];
@@ -319,7 +322,15 @@ UIAlertAction *submitCreateAction;
     if(self.fileTypeSelector.selectedSegmentIndex == 0){
         fileType = [NSNumber numberWithInt:FILE_YOUTUBE];
         NSArray *urlArray = [self.fileURLField.text componentsSeparatedByString:@"v="];
+        if (urlArray.count < 2){
+            [self presentAlertView:invalidYoutubeURL];
+            return;
+        }
         NSArray *videoIdArray = [urlArray[1] componentsSeparatedByString:@"&"];
+        if (videoIdArray.count < 1) {
+            [self presentAlertView:invalidYoutubeURL];
+            return;
+        }
         fileURL = videoIdArray[0];
     }else{
         fileType = [NSNumber numberWithInt:FILE_OTHER];

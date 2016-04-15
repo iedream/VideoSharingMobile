@@ -191,6 +191,10 @@
          NSData * jsonDict = [NSJSONSerialization  dataWithJSONObject:dict options:0 error:&err];
         // conver json to string
          stringDict = [[NSString alloc] initWithData:jsonDict encoding:NSUTF8StringEncoding];
+        
+        NSString *charactersToEscape = @"!*'();:@&=+$,/?%#[]\" ";
+        NSCharacterSet *customEncodingSet = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
+        stringDict = [stringDict stringByAddingPercentEncodingWithAllowedCharacters:customEncodingSet];
     }
     // create body string
     NSString *dataString;
