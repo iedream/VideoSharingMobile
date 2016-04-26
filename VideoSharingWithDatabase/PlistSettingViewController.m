@@ -94,7 +94,8 @@ UIAlertAction *submitCreateAction;
     }];
     [createGroup addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Conform Password";
-        textField.secureTextEntry = YES;textField.clearsOnBeginEditing = YES;
+        textField.secureTextEntry = YES;
+        textField.clearsOnBeginEditing = YES;
     }];
     submitCreateAction = [UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSString *groupName = createGroup.textFields.firstObject.text;
