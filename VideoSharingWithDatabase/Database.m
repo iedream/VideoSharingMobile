@@ -12,11 +12,12 @@
 
 #pragma mark - Route Method
 -(void)uploadPlist:(NSDictionary*)dict name:(NSString*)name {
-    NSData *data = [self dictToJson:dict name:name group:nil password:nil];
+    NSString *encodedName = [name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSData *data = [self dictToJson:dict group:nil password:nil];
     // calculate body string length
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/data"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
+    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/data/%@", encodedName];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -26,10 +27,11 @@
 }
 
 -(void)uploadPlist:(NSDictionary *)dict name:(NSString *)name group:(NSString*)group password:(NSString*)password {
+    NSString *encodedName = [name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSString *encodedGroup = [group stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSData *data = [self dictToJson:dict name:name group:nil password:password];
+    NSData *data = [self dictToJson:dict group:nil password:password];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
-    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/group/%@/data", encodedGroup];
+    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/group/%@/data/%@", encodedGroup, encodedName];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -41,7 +43,7 @@
 
 -(void)downloadPlist:(NSString*)name {
     NSString *encodedName = [name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/data?name=%@", encodedName];
+    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/data/%@", encodedName];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"GET"];
     [self downloading:[request copy]];
@@ -50,17 +52,17 @@
 -(void)downloadPlist:(NSString *)name group:(NSString*)group password:(NSString*)password {
     NSString *encodedName = [name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSString *encodedGroup = [group stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/group/%@/data?name=%@&password=%@", encodedGroup, encodedName, password];
+    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/group/%@/data/%@?password=%@", encodedGroup, encodedName, password];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"GET"];
     [self downloading:[request copy]];
 }
 
 -(void)createGroup:(NSString*)group password:(NSString*)password {
-    NSData *data = [self dictToJson:nil name:nil group:group password:password];
+    NSData *data = [self dictToJson:nil group:group password:password];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/create/group"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/group"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -69,25 +71,21 @@
 }
 
 -(void)delete:(NSString *)name {
-    NSData *data = [self dictToJson:nil name:name group:nil password:nil];
-    // calculate body string length
-    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://video-sharing-database.herokuapp.com/data"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
+    NSString *encodedName = [name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/data/%@", encodedName];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"DELETE"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:data];
     
     [self deleting:[request copy]];
 }
 
 -(void)delete:(NSString *)name group:(NSString *)group password:(NSString*)password {
+    NSString *encodedName = [name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSString *encodedGroup = [group stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSData *data = [self dictToJson:nil name:name group:nil password:password];
-    // calculate body string length
+    NSData *data = [self dictToJson:nil group:nil password:password];
     NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
-    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/group/%@/data", encodedGroup];
+    NSString *url = [NSString stringWithFormat:@"https://video-sharing-database.herokuapp.com/group/%@/data/%@", encodedGroup, encodedName];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:40.0];
     [request setHTTPMethod:@"DELETE"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -184,7 +182,7 @@
 }
 
 #pragma mark - Helper Method
--(NSData*)dictToJson:(NSDictionary*)dict name:(NSString*)name group:(NSString*)group password:(NSString*)password {
+-(NSData*)dictToJson:(NSDictionary*)dict group:(NSString*)group password:(NSString*)password {
     // convert dict into json if neccessary
     NSString * stringDict;
     if (dict) {
@@ -200,16 +198,14 @@
     }
     // create body string
     NSString *dataString;
-    if(password && dict && name) {
-        dataString = [NSString stringWithFormat:@"name=%@&data=%@&password=%@",name, stringDict, password];
-    }else if(name && password) {
-        dataString = [NSString stringWithFormat:@"name=%@&password=%@",name, password];
+    if(password && dict) {
+        dataString = [NSString stringWithFormat:@"data=%@&password=%@", stringDict, password];
     }else if(group && password) {
         dataString = [NSString stringWithFormat:@"groupId=%@&password=%@",group, password];
-    }else if(dict && name){
-        dataString = [NSString stringWithFormat:@"name=%@&data=%@",name, stringDict];
-    }else if(name) {
-        dataString = [NSString stringWithFormat:@"name=%@",name];
+    }else if(password) {
+        dataString = [NSString stringWithFormat:@"password=%@",password];
+    }else if(dict){
+        dataString = [NSString stringWithFormat:@"data=%@",stringDict];
     }
     
     // encode body string
